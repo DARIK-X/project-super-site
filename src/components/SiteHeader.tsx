@@ -1,4 +1,3 @@
-<<<<<<<
 import { Link } from "@tanstack/react-router";
 import { Menu, GraduationCap } from "lucide-react";
 import { useState } from "react";
