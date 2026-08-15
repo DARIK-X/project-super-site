@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ApplicantsRouteImport } from './routes/applicants'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as MajorsRouteImport } from './routes/majors'
 import { Route as NewsRouteImport } from './routes/news'
@@ -30,6 +31,11 @@ const AboutRoute = AboutRouteImport.update({
 const ApplicantsRoute = ApplicantsRouteImport.update({
   id: '/applicants',
   path: '/applicants',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GalleryRoute = GalleryRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/applicants': typeof ApplicantsRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/majors': typeof MajorsRoute
   '/news': typeof NewsRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/applicants': typeof ApplicantsRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/majors': typeof MajorsRoute
   '/news': typeof NewsRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/applicants': typeof ApplicantsRoute
+  '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/majors': typeof MajorsRoute
   '/news': typeof NewsRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/applicants'
+    | '/contact'
     | '/gallery'
     | '/majors'
     | '/news'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/applicants'
+    | '/contact'
     | '/gallery'
     | '/majors'
     | '/news'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/applicants'
+    | '/contact'
     | '/gallery'
     | '/majors'
     | '/news'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ApplicantsRoute: typeof ApplicantsRoute
+  ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
   MajorsRoute: typeof MajorsRoute
   NewsRoute: typeof NewsRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/applicants'
       fullPath: '/applicants'
       preLoaderRoute: typeof ApplicantsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gallery': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ApplicantsRoute: ApplicantsRoute,
+  ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
   MajorsRoute: MajorsRoute,
   NewsRoute: NewsRoute,
