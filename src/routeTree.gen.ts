@@ -11,7 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdmissionsRouteImport } from './routes/admissions'
+import { Route as ContactsRouteImport } from './routes/contacts'
+import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as SchoolsIndexRouteImport } from './routes/schools.index'
+import { Route as SchoolsIdRouteImport } from './routes/schools.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,40 +29,122 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdmissionsRoute = AdmissionsRouteImport.update({
+  id: '/admissions',
+  path: '/admissions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MethodologyRoute = MethodologyRouteImport.update({
+  id: '/methodology',
+  path: '/methodology',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SchoolsIndexRoute = SchoolsIndexRouteImport.update({
+  id: '/schools/',
+  path: '/schools/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SchoolsIdRoute = SchoolsIdRouteImport.update({
+  id: '/schools/$id',
+  path: '/schools/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admissions': typeof AdmissionsRoute
+  '/contacts': typeof ContactsRoute
+  '/documents': typeof DocumentsRoute
+  '/methodology': typeof MethodologyRoute
   '/news': typeof NewsRoute
+  '/schools/$id': typeof SchoolsIdRoute
+  '/schools/': typeof SchoolsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admissions': typeof AdmissionsRoute
+  '/contacts': typeof ContactsRoute
+  '/documents': typeof DocumentsRoute
+  '/methodology': typeof MethodologyRoute
   '/news': typeof NewsRoute
+  '/schools/$id': typeof SchoolsIdRoute
+  '/schools': typeof SchoolsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admissions': typeof AdmissionsRoute
+  '/contacts': typeof ContactsRoute
+  '/documents': typeof DocumentsRoute
+  '/methodology': typeof MethodologyRoute
   '/news': typeof NewsRoute
+  '/schools/$id': typeof SchoolsIdRoute
+  '/schools/': typeof SchoolsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/news'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/admissions'
+    | '/contacts'
+    | '/documents'
+    | '/methodology'
+    | '/news'
+    | '/schools/$id'
+    | '/schools/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/news'
-  id: '__root__' | '/' | '/about' | '/news'
+  to:
+    | '/'
+    | '/about'
+    | '/admissions'
+    | '/contacts'
+    | '/documents'
+    | '/methodology'
+    | '/news'
+    | '/schools/$id'
+    | '/schools'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/admissions'
+    | '/contacts'
+    | '/documents'
+    | '/methodology'
+    | '/news'
+    | '/schools/$id'
+    | '/schools/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdmissionsRoute: typeof AdmissionsRoute
+  ContactsRoute: typeof ContactsRoute
+  DocumentsRoute: typeof DocumentsRoute
+  MethodologyRoute: typeof MethodologyRoute
   NewsRoute: typeof NewsRoute
+  SchoolsIdRoute: typeof SchoolsIdRoute
+  SchoolsIndexRoute: typeof SchoolsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,11 +163,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admissions': {
+      id: '/admissions'
+      path: '/admissions'
+      fullPath: '/admissions'
+      preLoaderRoute: typeof AdmissionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/methodology': {
+      id: '/methodology'
+      path: '/methodology'
+      fullPath: '/methodology'
+      preLoaderRoute: typeof MethodologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/news': {
       id: '/news'
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schools/': {
+      id: '/schools/'
+      path: '/schools'
+      fullPath: '/schools/'
+      preLoaderRoute: typeof SchoolsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schools/$id': {
+      id: '/schools/$id'
+      path: '/schools/$id'
+      fullPath: '/schools/$id'
+      preLoaderRoute: typeof SchoolsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -88,7 +218,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdmissionsRoute: AdmissionsRoute,
+  ContactsRoute: ContactsRoute,
+  DocumentsRoute: DocumentsRoute,
+  MethodologyRoute: MethodologyRoute,
   NewsRoute: NewsRoute,
+  SchoolsIdRoute: SchoolsIdRoute,
+  SchoolsIndexRoute: SchoolsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
