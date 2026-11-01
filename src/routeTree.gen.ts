@@ -11,12 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as ApplicantsRouteImport } from './routes/applicants'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as GalleryRouteImport } from './routes/gallery'
-import { Route as MajorsRouteImport } from './routes/majors'
+import { Route as AdmissionsRouteImport } from './routes/admissions'
+import { Route as ContactsRouteImport } from './routes/contacts'
+import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as MethodologyRouteImport } from './routes/methodology'
 import { Route as NewsRouteImport } from './routes/news'
-import { Route as TeachersRouteImport } from './routes/teachers'
+import { Route as SchoolsIndexRouteImport } from './routes/schools.index'
+import { Route as SchoolsIdRouteImport } from './routes/schools.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,24 +29,24 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApplicantsRoute = ApplicantsRouteImport.update({
-  id: '/applicants',
-  path: '/applicants',
+const AdmissionsRoute = AdmissionsRouteImport.update({
+  id: '/admissions',
+  path: '/admissions',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
+const ContactsRoute = ContactsRouteImport.update({
+  id: '/contacts',
+  path: '/contacts',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GalleryRoute = GalleryRouteImport.update({
-  id: '/gallery',
-  path: '/gallery',
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MajorsRoute = MajorsRouteImport.update({
-  id: '/majors',
-  path: '/majors',
+const MethodologyRoute = MethodologyRouteImport.update({
+  id: '/methodology',
+  path: '/methodology',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsRoute = NewsRouteImport.update({
@@ -53,85 +54,97 @@ const NewsRoute = NewsRouteImport.update({
   path: '/news',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TeachersRoute = TeachersRouteImport.update({
-  id: '/teachers',
-  path: '/teachers',
+const SchoolsIndexRoute = SchoolsIndexRouteImport.update({
+  id: '/schools/',
+  path: '/schools/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SchoolsIdRoute = SchoolsIdRouteImport.update({
+  id: '/schools/$id',
+  path: '/schools/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/applicants': typeof ApplicantsRoute
-  '/contact': typeof ContactRoute
-  '/gallery': typeof GalleryRoute
-  '/majors': typeof MajorsRoute
+  '/admissions': typeof AdmissionsRoute
+  '/contacts': typeof ContactsRoute
+  '/documents': typeof DocumentsRoute
+  '/methodology': typeof MethodologyRoute
   '/news': typeof NewsRoute
-  '/teachers': typeof TeachersRoute
+  '/schools/$id': typeof SchoolsIdRoute
+  '/schools/': typeof SchoolsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/applicants': typeof ApplicantsRoute
-  '/contact': typeof ContactRoute
-  '/gallery': typeof GalleryRoute
-  '/majors': typeof MajorsRoute
+  '/admissions': typeof AdmissionsRoute
+  '/contacts': typeof ContactsRoute
+  '/documents': typeof DocumentsRoute
+  '/methodology': typeof MethodologyRoute
   '/news': typeof NewsRoute
-  '/teachers': typeof TeachersRoute
+  '/schools/$id': typeof SchoolsIdRoute
+  '/schools': typeof SchoolsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/applicants': typeof ApplicantsRoute
-  '/contact': typeof ContactRoute
-  '/gallery': typeof GalleryRoute
-  '/majors': typeof MajorsRoute
+  '/admissions': typeof AdmissionsRoute
+  '/contacts': typeof ContactsRoute
+  '/documents': typeof DocumentsRoute
+  '/methodology': typeof MethodologyRoute
   '/news': typeof NewsRoute
-  '/teachers': typeof TeachersRoute
+  '/schools/$id': typeof SchoolsIdRoute
+  '/schools/': typeof SchoolsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
-    | '/applicants'
-    | '/contact'
-    | '/gallery'
-    | '/majors'
+    | '/admissions'
+    | '/contacts'
+    | '/documents'
+    | '/methodology'
     | '/news'
-    | '/teachers'
+    | '/schools/$id'
+    | '/schools/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/applicants'
-    | '/contact'
-    | '/gallery'
-    | '/majors'
+    | '/admissions'
+    | '/contacts'
+    | '/documents'
+    | '/methodology'
     | '/news'
-    | '/teachers'
+    | '/schools/$id'
+    | '/schools'
   id:
     | '__root__'
     | '/'
     | '/about'
-    | '/applicants'
-    | '/contact'
-    | '/gallery'
-    | '/majors'
+    | '/admissions'
+    | '/contacts'
+    | '/documents'
+    | '/methodology'
     | '/news'
-    | '/teachers'
+    | '/schools/$id'
+    | '/schools/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  ApplicantsRoute: typeof ApplicantsRoute
-  ContactRoute: typeof ContactRoute
-  GalleryRoute: typeof GalleryRoute
-  MajorsRoute: typeof MajorsRoute
+  AdmissionsRoute: typeof AdmissionsRoute
+  ContactsRoute: typeof ContactsRoute
+  DocumentsRoute: typeof DocumentsRoute
+  MethodologyRoute: typeof MethodologyRoute
   NewsRoute: typeof NewsRoute
-  TeachersRoute: typeof TeachersRoute
+  SchoolsIdRoute: typeof SchoolsIdRoute
+  SchoolsIndexRoute: typeof SchoolsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -150,32 +163,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/applicants': {
-      id: '/applicants'
-      path: '/applicants'
-      fullPath: '/applicants'
-      preLoaderRoute: typeof ApplicantsRouteImport
+    '/admissions': {
+      id: '/admissions'
+      path: '/admissions'
+      fullPath: '/admissions'
+      preLoaderRoute: typeof AdmissionsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
+    '/contacts': {
+      id: '/contacts'
+      path: '/contacts'
+      fullPath: '/contacts'
+      preLoaderRoute: typeof ContactsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/gallery': {
-      id: '/gallery'
-      path: '/gallery'
-      fullPath: '/gallery'
-      preLoaderRoute: typeof GalleryRouteImport
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/majors': {
-      id: '/majors'
-      path: '/majors'
-      fullPath: '/majors'
-      preLoaderRoute: typeof MajorsRouteImport
+    '/methodology': {
+      id: '/methodology'
+      path: '/methodology'
+      fullPath: '/methodology'
+      preLoaderRoute: typeof MethodologyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news': {
@@ -185,11 +198,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/teachers': {
-      id: '/teachers'
-      path: '/teachers'
-      fullPath: '/teachers'
-      preLoaderRoute: typeof TeachersRouteImport
+    '/schools/': {
+      id: '/schools/'
+      path: '/schools'
+      fullPath: '/schools/'
+      preLoaderRoute: typeof SchoolsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schools/$id': {
+      id: '/schools/$id'
+      path: '/schools/$id'
+      fullPath: '/schools/$id'
+      preLoaderRoute: typeof SchoolsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -198,12 +218,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  ApplicantsRoute: ApplicantsRoute,
-  ContactRoute: ContactRoute,
-  GalleryRoute: GalleryRoute,
-  MajorsRoute: MajorsRoute,
+  AdmissionsRoute: AdmissionsRoute,
+  ContactsRoute: ContactsRoute,
+  DocumentsRoute: DocumentsRoute,
+  MethodologyRoute: MethodologyRoute,
   NewsRoute: NewsRoute,
-  TeachersRoute: TeachersRoute,
+  SchoolsIdRoute: SchoolsIdRoute,
+  SchoolsIndexRoute: SchoolsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

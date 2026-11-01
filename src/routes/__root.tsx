@@ -81,17 +81,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "14 Колледж — кәсіптік және педагогикалық білім" },
-      {
-        name: "description",
-        content:
-          "№14 кәсіптік колледж: мамандықтар, талапкерге арналған ақпарат, жаңалықтар және байланыс.",
-      },
-      { property: "og:title", content: "14 Колледж" },
-      {
-        property: "og:description",
-        content: "Кәсіптік және педагогикалық мамандықтар бойынша білім беретін колледж.",
-      },
+      { title: "Жетісай аудандық білім бөлімі" },
+      { name: "description", content: "Жетісай ауданының білім беру ақпараттық порталы." },
+      { property: "og:title", content: "Жетісай аудандық білім бөлімі" },
+      { property: "og:description", content: "Мектептер, жаңалықтар, құжаттар — бір порталда." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -104,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
@@ -134,17 +127,15 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        <div className="flex min-h-screen flex-col">
-          <SiteHeader />
-          <main className="flex-1">
-            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-            <Outlet />
-          </main>
-          <SiteFooter />
-        </div>
-        <Toaster position="top-center" />
-      </LanguageProvider>
+      <div className="flex min-h-screen flex-col">
+        <SiteHeader />
+        <main className="flex-1">
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </main>
+        <SiteFooter />
+      </div>
+      <Toaster position="top-center" />
     </QueryClientProvider>
   );
 }
