@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { PageHeader } from "@/components/PageHeader";
-import { Badge } from "@/components/ui/badge";
-import { news, formatDate } from "@/data/site";
+import { NewsCard } from "@/components/NewsCard";
+import { newsQuery } from "@/lib/news";
+import { useT } from "@/lib/prefs";
 
 export const Route = createFileRoute("/news")({
   head: () => ({
@@ -12,24 +14,19 @@ export const Route = createFileRoute("/news")({
       { property: "og:description", content: "Аудан мектептерінің жаңалықтары." },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(newsQuery),
   component: NewsPage,
 });
 
 function NewsPage() {
+  const t = useT();
+  const { data } = useSuspenseQuery(newsQuery);
   return (
     <>
-      <PageHeader eyebrow="Өзекті ақпарат" title="Жаңалықтар" subtitle="Аудан мектептері мен білім бөлімінің соңғы оқиғалары." />
+      <PageHeader eyebrow={t("Өзекті ақпарат")} title={t("Жаңалықтар")} subtitle={t("Аудан мектептері мен білім бөлімінің соңғы оқиғалары.")} />
       <section className="container-page grid gap-5 py-16 md:grid-cols-2 lg:grid-cols-3">
-        {news.map((n) => (
-          <article key={n.title} className="rounded-2xl border border-border bg-card p-6 shadow-soft">
-            <div className="flex items-center gap-3">
-              <Badge variant="secondary">{n.tag}</Badge>
-              <time className="text-xs text-muted-foreground" dateTime={n.date}>{formatDate(n.date)}</time>
-            </div>
-            <h2 className="mt-4 text-lg font-semibold text-balance">{n.title}</h2>
-            <p className="mt-3 text-sm text-muted-foreground">{n.text}</p>
-          </article>
-        ))}
+        {data.map((n) => <NewsCard key={n.id} n={n} big />)}
+        {data.length === 0 ? <p className="text-muted-foreground">{t("Әзірге жаңалық жоқ.")}</p> : null}
       </section>
     </>
   );
