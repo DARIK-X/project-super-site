@@ -4,6 +4,7 @@ import { MapPin, Search, Users } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Input } from "@/components/ui/input";
 import { schools } from "@/data/site";
+import { useT } from "@/lib/prefs";
 
 export const Route = createFileRoute("/schools/")({
   head: () => ({
@@ -18,28 +19,31 @@ export const Route = createFileRoute("/schools/")({
 });
 
 function SchoolsPage() {
+  const t = useT();
   const [q, setQ] = useState("");
-  const list = schools.filter((s) => (s.name + s.location).toLowerCase().includes(q.toLowerCase()));
+  const list = schools.filter((s) =>
+    (s.name + s.location + t(s.name) + t(s.location)).toLowerCase().includes(q.toLowerCase()),
+  );
   return (
     <>
-      <PageHeader eyebrow="Білім беру ұйымдары" title="Мектептер" subtitle="Мектепті іздеп, негізгі мәліметтерін қараңыз және ресми сайтына өтіңіз." />
+      <PageHeader eyebrow={t("Білім беру ұйымдары")} title={t("Мектептер")} subtitle={t("Мектепті іздеп, негізгі мәліметтерін қараңыз және ресми сайтына өтіңіз.")} />
       <section className="container-page py-12">
         <div className="relative max-w-md">
           <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
-          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Мектеп атауы немесе ауыл…" className="h-12 rounded-xl pl-10" />
+          <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("Мектеп атауы немесе ауыл…")} className="h-12 rounded-xl pl-10" />
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
           {list.map((s) => (
             <Link key={s.id} to="/schools/$id" params={{ id: s.id }} className="rounded-2xl border border-border bg-card p-6 shadow-soft transition-shadow hover:shadow-lift">
-              <span className="text-xs font-semibold tracking-widest text-accent uppercase">{s.type}</span>
-              <h2 className="mt-2 text-lg font-semibold text-balance">{s.name}</h2>
+              <span className="text-xs font-semibold tracking-widest text-accent uppercase">{t(s.type)}</span>
+              <h2 className="mt-2 text-lg font-semibold text-balance">{t(s.name)}</h2>
               <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5"><MapPin className="size-4" />{s.location}</span>
-                {s.students ? <span className="flex items-center gap-1.5"><Users className="size-4" />{s.students} оқушы</span> : null}
+                <span className="flex items-center gap-1.5"><MapPin className="size-4" />{t(s.location)}</span>
+                {s.students ? <span className="flex items-center gap-1.5"><Users className="size-4" />{s.students} {t("оқушы")}</span> : null}
               </div>
             </Link>
           ))}
-          {list.length === 0 ? <p className="text-muted-foreground">Ештеңе табылмады.</p> : null}
+          {list.length === 0 ? <p className="text-muted-foreground">{t("Ештеңе табылмады.")}</p> : null}
         </div>
       </section>
     </>
