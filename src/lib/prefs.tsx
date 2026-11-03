@@ -72,7 +72,7 @@ export function usePrefs() {
   return c;
 }
 
-export const useT = () => usePrefs().t;
+export const useT = () => useContext(Ctx)?.t ?? ((s: string) => s);
 
 const locales: Record<Lang, string> = { kk: "kk-KZ", ru: "ru-RU", en: "en-GB" };
 export function useFormatDate() {
