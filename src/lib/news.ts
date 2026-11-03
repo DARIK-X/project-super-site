@@ -1,5 +1,5 @@
 import { queryOptions } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
+import { listNews } from "@/lib/news.functions";
 import type { Lang } from "@/lib/prefs";
 
 export type NewsRow = {
@@ -16,11 +16,7 @@ export type NewsRow = {
 
 export const newsQuery = queryOptions({
   queryKey: ["news"],
-  queryFn: async () => {
-    const { data, error } = await supabase.from("news").select("*").order("date", { ascending: false });
-    if (error) throw error;
-    return data as NewsRow[];
-  },
+  queryFn: async () => (await listNews()) as NewsRow[],
 });
 
 export const pick = (n: NewsRow, field: "title" | "text", lang: Lang) =>
