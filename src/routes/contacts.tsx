@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { site } from "@/data/site";
+import { useT } from "@/lib/prefs";
 
 export const Route = createFileRoute("/contacts")({
   head: () => ({
@@ -12,16 +13,17 @@ export const Route = createFileRoute("/contacts")({
       { property: "og:description", content: "Бізбен байланысыңыз." },
     ],
   }),
-  component: () => {
+  component: function ContactsPage() {
+    const t = useT();
     const rows = [
-      { icon: MapPin, label: "Мекенжай", value: site.address },
-      { icon: Phone, label: "Телефон", value: site.phone, href: `tel:${site.phone.replace(/[^+\d]/g, "")}` },
+      { icon: MapPin, label: t("Мекенжай"), value: t(site.address) },
+      { icon: Phone, label: t("Телефон"), value: site.phone, href: `tel:${site.phone.replace(/[^+\d]/g, "")}` },
       { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
-      { icon: Clock, label: "Жұмыс уақыты", value: site.hours },
+      { icon: Clock, label: t("Жұмыс уақыты"), value: t(site.hours) },
     ];
     return (
       <>
-        <PageHeader eyebrow="Байланыс" title="Бізбен байланысыңыз" subtitle={site.region} />
+        <PageHeader eyebrow={t("Байланыс")} title={t("Бізбен байланысыңыз")} subtitle={t(site.region)} />
         <section className="container-page grid gap-8 py-16 lg:grid-cols-2">
           <div className="grid gap-4 sm:grid-cols-2">
             {rows.map((r) => (
@@ -32,7 +34,7 @@ export const Route = createFileRoute("/contacts")({
               </div>
             ))}
           </div>
-          <iframe title="Карта" src={site.mapEmbed} className="min-h-80 w-full rounded-2xl border border-border" loading="lazy" />
+          <iframe title={t("Карта")} src={site.mapEmbed} className="min-h-80 w-full rounded-2xl border border-border" loading="lazy" />
         </section>
       </>
     );
