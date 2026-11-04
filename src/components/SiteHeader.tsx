@@ -50,7 +50,7 @@ export function SiteHeader() {
             <span className="block text-[11px] font-normal text-muted-foreground">{t(site.tagline)}</span>
           </span>
         </Link>
-        <nav className="ml-auto hidden items-center gap-0.5 xl:flex">
+        <nav className="site-nav ml-auto hidden items-center gap-0.5 xl:flex">
           {nav.map((l) => (
             <Link
               key={l.to}
@@ -63,12 +63,12 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="ml-auto flex items-center gap-2 xl:ml-2">
+        <div className="site-tools ml-auto flex items-center gap-2 xl:ml-2">
           <LangSwitch />
           <A11yPanel />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="xl:hidden" aria-label={t("Мәзір")}>
+              <Button variant="outline" size="icon" className="site-menu-btn xl:hidden" aria-label={t("Мәзір")}>
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>

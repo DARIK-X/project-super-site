@@ -41,7 +41,7 @@ function Index() {
           <div className="px-6 py-20 md:px-14 md:py-32">
             <Badge className="bg-accent text-accent-foreground hover:bg-accent">{t(site.region)}</Badge>
             <h1 className="mt-6 max-w-3xl text-4xl font-bold text-balance text-primary-foreground md:text-6xl">
-              {t("Бір аудан. Бір мақсат.")} <span className="text-accent">{t("Жарқын болашақ.")}</span>
+              {t("Бір аудан. Бір мақсат.")} <span className="hero-accent text-accent">{t("Жарқын болашақ.")}</span>
             </h1>
             <p className="mt-6 max-w-xl text-primary-foreground/85 md:text-lg">
               {t("Мектептер, мүмкіндіктер және пайдалы ақпарат — Жетісай ауданының білім кеңістігі бір порталда.")}
