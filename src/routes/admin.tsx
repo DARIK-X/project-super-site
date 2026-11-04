@@ -53,7 +53,7 @@ function Login() {
         ? await supabase.auth.signInWithPassword({ email, password })
         : await supabase.auth.signUp({ email, password, options: { emailRedirectTo: `${window.location.origin}/admin` } });
     setBusy(false);
-    if (res.error) return toast.error(res.error.message);
+    if (res.error) { toast.error(res.error.message); return; }
     if (mode === "up" && !res.data.session) toast.success("Поштаңызға растау хаты жіберілді.");
   };
   return (
@@ -99,7 +99,7 @@ function Dashboard({ userId, email }: { userId: string; email: string }) {
   const save = async (e: FormEvent) => {
     e.preventDefault();
     const res = editId ? await supabase.from("news").update(form).eq("id", editId) : await supabase.from("news").insert(form);
-    if (res.error) return toast.error(res.error.message);
+    if (res.error) { toast.error(res.error.message); return; }
     toast.success("Сақталды");
     setForm(empty);
     setEditId(null);
@@ -108,7 +108,7 @@ function Dashboard({ userId, email }: { userId: string; email: string }) {
   const remove = async (id: string) => {
     if (!confirm("Жаңалықты өшіру керек пе?")) return;
     const { error } = await supabase.from("news").delete().eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["news"] });
   };
   const edit = (n: NewsRow) => {

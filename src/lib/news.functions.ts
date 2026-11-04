@@ -2,8 +2,8 @@ import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 
 export const listNews = createServerFn({ method: "GET" }).handler(async () => {
-  const key = process.env.SUPABASE_PUBLISHABLE_KEY!;
-  const sb = createClient(process.env.SUPABASE_URL!, key, {
+  const key = process.env["SUPABASE_PUBLISHABLE_KEY"]!;
+  const sb = createClient(process.env["SUPABASE_URL"]!, key, {
     auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
     global: {
       fetch: (input, init) => {

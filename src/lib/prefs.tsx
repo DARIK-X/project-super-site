@@ -49,10 +49,10 @@ export function PrefsProvider({ children }: { children: ReactNode }) {
     localStorage.setItem(KEY, JSON.stringify({ lang, a11y, fontSize, contrast, hideImages }));
     const html = document.documentElement;
     html.lang = lang;
-    html.dataset.a11y = a11y ? "on" : "off";
-    html.dataset.font = a11y ? fontSize : "normal";
-    html.dataset.contrast = a11y ? contrast : "normal";
-    html.dataset.noimg = a11y && hideImages ? "on" : "off";
+    html.dataset["a11y"] = a11y ? "on" : "off";
+    html.dataset["font"] = a11y ? fontSize : "normal";
+    html.dataset["contrast"] = a11y ? contrast : "normal";
+    html.dataset["noimg"] = a11y && hideImages ? "on" : "off";
   }, [ready, lang, a11y, fontSize, contrast, hideImages]);
 
   const t = useCallback((kk: string) => (lang === "kk" ? kk : (dict[kk]?.[lang] ?? kk)), [lang]);
